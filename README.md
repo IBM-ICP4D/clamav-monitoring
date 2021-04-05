@@ -7,7 +7,7 @@ Steps:
 
 1. Clone the GitHub repository:
 ```
-git clone https://github.ibm.com/Priya-Ranjan-Sahoo/clamav_monitoring
+git clone https://github.com/IBM-ICP4D/clamav-monitoring
 ```
 
 2. Navigate to the working directory:
@@ -17,7 +17,7 @@ cd clamav_monitoring
 
 3. Customize the antivirus scan options in the script scan.sh and for the directories to be scanned as needed. For more information, see the official configuration documentation at https://www.clamav.net/documents/configuration . 
 
-Some example are 
+Some examples are 
 
 3.1. Scan all folders in /host-fs excluding certain directories
 
@@ -66,7 +66,7 @@ oc create namespace clamav-scanner
 oc create serviceaccount clamav-sa -n clamav-scanner
 ```
 
-7. If you need to run the scanner in a privileged mode , you need to add privileged scc to the service account
+7. If you need to run the scanner in a privileged mode as it needs access to the host filesystem. So you need to add privileged scc to the service account
 ```
 oc adm policy add-scc-to-user privileged system:serviceaccount:clamav-scanner:clamav-sa
 ```
