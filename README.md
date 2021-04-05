@@ -76,3 +76,9 @@ oc adm policy add-scc-to-user privileged system:serviceaccount:clamav-scanner:cl
 oc project clamav-scanner
 oc create -f clamav-daemonset.yaml
 ```
+
+9. The scan output can be seen on the worker nodes by looking at the /var/log/clamav/clamscan.log log file or to see only a summary you can grep for the following lines in the log files.
+
+```
+egrep 'Starting scan|SCAN SUMMARY|Known viruses|Engine version|Scanned directories|Scanned file|Infected files|Data scanned|Data read|Time:' /var/log/clamav/clamscan.log
+```
