@@ -13,9 +13,6 @@ else
     --stdout \
     --log=/logs/clamscan.log \
     --recursive \
-    --exclude=/host-fs/dev \
-    --exclude=/host-fs/sys \
-    --exclude=/host-fs/var/lib/docker \
-    /host-fs
+    --file-list=/folders_to_scan.txt
   rm $LOCK
 fi

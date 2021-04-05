@@ -14,6 +14,7 @@ COPY conf /etc/clamav
 COPY start.py /start.py
 COPY health.sh /health.sh
 COPY scan.sh /scan.sh
+COPY folders_to_scan.txt  /folders_to_scan.txt 
 RUN chmod +x /health.sh /scan.sh
 
 CMD /start.py

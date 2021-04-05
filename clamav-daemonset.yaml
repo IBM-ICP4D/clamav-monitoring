@@ -4,6 +4,7 @@ metadata:
   name: clamav
   labels:
     k8s-app: clamav-host-scanner
+  namespace: clamav-scanner
 spec:
   selector:
     matchLabels:
@@ -13,18 +14,20 @@ spec:
       labels:
         name: clamav
     spec:
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        effect: NoSchedule
+      nodeSelector: 
+        node-role.kubernetes.io/worker: ""
       containers:
       - name: clamav-scanner
-        image: image-registry.openshift-image-registry.svc:5000/clamav/clamav:v1.0.0
+        image: image-registry.openshift-image-registry.svc:5000/clamav-scanner/clamav:1.0.0
         resources:
           limits:
+            cpu: 1Gi
             memory: 3Gi
           requests:
             cpu: 500m
             memory: 2Gi
+        securityContext:
+          privileged: true
         volumeMounts:
         - name: data-vol
           mountPath: /data
@@ -45,7 +48,9 @@ spec:
         emptyDir: {}
       - name: host-fs
         hostPath:
-          path: /
+          path: /var/lib/kubelet/pods
       - name: logs
         hostPath:
           path: /var/log/clamav
+      serviceAccount: clamav-sa
+      serviceAccountName: clamav-sa
