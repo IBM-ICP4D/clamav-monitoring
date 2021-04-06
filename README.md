@@ -3,6 +3,8 @@ ClamAV monitoring for OpenShift clusters
 
 In this demo, we create a custom Docker image that mounts its host server's file system and then scans that folder at regular intervals using OpenSource ClamAV. https://www.clamav.net/
 
+Note:  CP4D Platform and some services use Cockroach, Postgres and etcd data stores which should never be live-scanned by an antivirus scanner.  These need to be excluded when scanning the host server's filesystem.
+
 Steps:
 
 1. Clone the GitHub repository:
